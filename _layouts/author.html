@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<h1>{{ page.name }}</h1>
+<h2>{{ page.position }}</h2>
+
+{{ content }}
+
+<h2>Posts</h2>
+<ul>
+    {% comment %} gets posts where 'author' (in the header for each post) is equal to the short_name given in the header of the author markdown file used to generate this author page {% endcomment %}
+    {% assign filtered_posts = site.posts | where: 'author', page.short_name %} 
+    {% comment %} iterates over the list of posts {% endcomment %}
+    {% for post in filtered_posts %} 
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>

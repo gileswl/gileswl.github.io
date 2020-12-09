@@ -1,0 +1,12 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<p>{{ page.date | date_to_string }} - {{ page.author }}</p>
+{% comment %} Gets collection 'site.authors', filters for author objects in which short name matches the author variable for this page, then filters for first item, assigns that to the array 'author' {% endcomment %}
+{% assign author = site.authors | where: 'short_name', page.author | first %}
+{% comment %} I think this checks that author is "truthy" i.e. has any value bar nil or false. Then outputs the link based on Liquid processing the stuff in double braces. {% endcomment %}
+  {% if author %}
+    - <a href="{{ author.url }}">{{ author.name }}</a>
+  {% endif %}
+{{ content }}
